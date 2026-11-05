@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
-
-const categorySchema = new mongoose.Schema(
+const categorySchema = mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, "Title is required"],
+      required: [true, "is required"],
       unique: [true, "is already tken"],
-      maxlength: [100, "Maximum"],
+      maxlength: [10],
       trim: true,
     },
-    icone: {
+    icon: {
       type: String,
       default: "",
     },
@@ -22,4 +21,3 @@ const categorySchema = new mongoose.Schema(
 );
 const Category = mongoose.model("Category", categorySchema);
 export default Category;
- 
