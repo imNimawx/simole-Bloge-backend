@@ -38,3 +38,30 @@ export const login = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+// register
+export const register = catchAsync(async (req, res, next) => {
+  const { fullname = "", username = "", password = "" } = req.body;
+  if (!username || !password) {
+    return next(new HandleERROR("username and password are required", 400));
+  }
+  const passReg = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/);
+  if (!passReg.test(password)) {
+    return next(
+      new HandleERROR(
+        "invalid Password,Password must be Contain A-Z,a-z,0-9 and min 8 character",
+        400,
+      ),
+    );
+  }
+  const hashPassword = bcrypt.hashSync(password, 10);
+  const user = await User.create({
+    fullname,
+    username,
+    password: hashPassword,
+  });
+  return res.status(201).json({
+    success: true,
+    message: "User Created Successfully",
+  });
+});

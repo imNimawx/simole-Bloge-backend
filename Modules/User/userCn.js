@@ -88,6 +88,7 @@ export const changePassword = catchAsync(async (req, res, next) => {
     res.status(200),
     json({
       success: true,
+      data: newUser, 
       message: "User password Update successFully",
     })
   );
