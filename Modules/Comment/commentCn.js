@@ -66,3 +66,15 @@ export const changePublished = catchAsync(async (req, res, next) => {
     message: "Comment deleted Successfully",
   });
 });
+
+export const remove = catchAsync(async (req, res, next) => {
+    const comment = await Comment.findById(req.params.id)
+    if(req.role=='user'&& req.userId.toString()!=comment.userId.toString()){
+        return next(new HandleERROR('You do not have permission',401))
+    }
+     await Comment.findByIdAndDelete(req.params.id)
+    return res.status(201).json({
+        success: true, 
+        message: 'Comment deleted Successfully'
+    })
+})
