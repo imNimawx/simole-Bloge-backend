@@ -4,6 +4,7 @@ import cors from "cors";
 import { fileURLToPath } from "url";
 import path from "path";
 import { catchError } from "vanta-api";
+import exportValidation from "./Middlewares/exportValidation.js";
 
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
@@ -13,7 +14,7 @@ app.use(express.json());
 
 app.use(morgan("dev"));
 
-
+app.use(exportValidation)
 
 
 app.use(catchError)
