@@ -1,5 +1,5 @@
 import { Router } from "express";
-import isAdmin from "../../Middlewares/isAdmin";
+import isAdmin from "../../Middlewares/isAdmin.js";
 import { changePassword, getAll, getOne, update } from "./userCn.js";
 const userRouter = Router();
 userRouter.route("/").get(isAdmin, getAll);
