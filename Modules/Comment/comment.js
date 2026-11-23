@@ -6,8 +6,8 @@ import {
   getAllCommentsOfPost,
   remove,
 } from "./commentCn.js";
-import isAdmin from "../../Middlewares/isAdmin";
-import isLogin from "../../Middlewares/isLogin";
+import isAdmin from "../../Middlewares/isAdmin.js";
+import isLogin from "../../Middlewares/isLogin.js";
 
 const cmRouter = Router();
 cmRouter.route("/").get(isAdmin, getAll).post(isLogin, create);
